@@ -1,18 +1,25 @@
 // Class to perform all library operations
 
 public class Library {
+    FileManager fm = new FileManager();
 
     // Array to store books
     Book[] books = new Book[100];
 
     // Number of books currently stored
     int count = 0;
+    Library() {
+
+    count = fm.loadBooks(books);
+
+}
 
     // Add Book
     void addBook(Book b) {
 
         books[count] = b;
         count++;
+        fm.saveBooks(books, count);
 
         System.out.println("Book Added Successfully.");
     }
@@ -56,6 +63,7 @@ public class Library {
         }
         else {
             b.available = false;
+            fm.saveBooks(books, count);
             System.out.println("Book Issued Successfully.");
         }
     }
@@ -73,6 +81,7 @@ public class Library {
         }
         else {
             b.available = true;
+            fm.saveBooks(books, count);
             System.out.println("Book Returned Successfully.");
         }
     }
@@ -102,6 +111,7 @@ public class Library {
 
         books[count - 1] = null;
         count--;
+        fm.saveBooks(books, count);
 
         System.out.println("Book Removed Successfully.");
     }
